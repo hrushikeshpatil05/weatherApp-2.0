@@ -10,7 +10,8 @@ export default class Container extends Component {
       city: null,
       data: [],
       main: null,
-      description:null,
+      description:"weather",
+      temp:"temp",
       check: false
     };
   }
@@ -26,12 +27,12 @@ export default class Container extends Component {
         const t = temp.weather[0];
         const main = t.main;
         const des = t.description;
+        const tempr = temp.main.temp;
         this.setState({
-         city:city,data:t,main:main,description:des,check:true
+         city:city,data:t,main:main,description:des,temp:tempr,check:true
         }, () => {
-          console.log(this.state.data)
-          console.log(main)
-          console.log(this.state.city)
+          console.log(this.state.temp);
+          console.log(this.state.description)
         });
       })
       .catch(err => {
@@ -45,7 +46,7 @@ export default class Container extends Component {
     const one = this.state.data;
     return (
       <div>
-        <Weather click={this.checkHandler} main={this.state.main} des={this.state.description} city={this.state.city}/>
+        <Weather click={this.checkHandler} temp={this.state.temp} main={this.state.main} des={this.state.description} city={this.state.city}/>
       </div>
     );
   }
