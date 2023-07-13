@@ -11,7 +11,7 @@ export default class Container extends Component {
       data: [],
       main: null,
       description:"weather",
-      temp:"temp",
+      temp:0.0,
       check: false
     };
   }
@@ -27,12 +27,13 @@ export default class Container extends Component {
         const t = temp.weather[0];
         const main = t.main;
         const des = t.description;
-        const tempr = temp.main.temp;
+        let tempr = (temp.main.temp-273.15);
+        let res1 = (parseFloat(tempr.toFixed(2)));
         this.setState({
-         city:city,data:t,main:main,description:des,temp:tempr,check:true
+         city:city,data:t,main:main,description:des,temp:res1,check:true
         }, () => {
           console.log(this.state.temp);
-          console.log(this.state.description)
+          console.log(this.state.description);
         });
       })
       .catch(err => {
