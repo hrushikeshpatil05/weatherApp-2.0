@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Weather from "./Weather";
 import axios from 'axios';
 
+
 export default class Container extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +13,7 @@ export default class Container extends Component {
       main: null,
       description:"weather",
       temp:0.0,
+      pic: 0,
       check: false
     };
   }
@@ -29,8 +31,21 @@ export default class Container extends Component {
         const des = t.description;
         let tempr = (temp.main.temp-273.15);
         let res1 = (parseFloat(tempr.toFixed(2)));
+        let tempPic = this.state.pic;
+        if(des==="overcast clouds"){
+          tempPic = 1;
+        }
+        else if(des==="rain" || des == "moderate rain") {
+          tempPic = 2;
+        }
+        else if(des==="mist"){
+          tempPic = 3;
+        }
+        else{
+          tempPic = 0;
+        }
         this.setState({
-         city:city,data:t,main:main,description:des,temp:res1,check:true
+         city:city,data:t,main:main,description:des,temp:res1,pic:tempPic,check:true
         }, () => {
           console.log(this.state.temp);
           console.log(this.state.description);
@@ -47,7 +62,7 @@ export default class Container extends Component {
     const one = this.state.data;
     return (
       <div>
-        <Weather click={this.checkHandler} temp={this.state.temp} main={this.state.main} des={this.state.description} city={this.state.city}/>
+        <Weather click={this.checkHandler} pic={this.state.pic} temp={this.state.temp} main={this.state.main} des={this.state.description} city={this.state.city}/>
       </div>
     );
   }
