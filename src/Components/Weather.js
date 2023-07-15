@@ -32,8 +32,15 @@ export default function weather(props) {
             <div className="place">{props.city}</div>
           </div>
         </div>
-        <div className="date">{date}</div>
+        <div className="date">
+          <h3 className="datefont">{date}</h3></div>
       </article>
+      <div className="form2">
+          <button type="button" onClick={props.position}>Use my Location</button>
+        </div>
+      <div className="gap">
+        <h2>OR</h2>
+      </div>
       <form onSubmit={props.click}>
         <div className="container">
           <input
@@ -46,7 +53,11 @@ export default function weather(props) {
           <br />
           <button type="submit">Fetch Weather</button>
         </div>
+        
       </form>
+      <div>
+      </div>
+      
     </>
   );
 }
