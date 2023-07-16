@@ -34,16 +34,17 @@ export default class Container extends Component {
           .then((res) => {
             const temp = res.data;
             const t = temp.weather[0];
+            const c = res.data.weather[0].main;
             const main = t.main;
             const des = t.description;
             let tempr = temp.main.temp - 273.15;
             let res1 = parseFloat(tempr.toFixed(2));
             let tempPic = this.state.pic;
-            if (des === "overcast clouds") {
+            if (c === "Clouds") {
               tempPic = 1;
-            } else if (des === "rain" || des === "moderate rain") {
+            } else if (c === "Rain") {
               tempPic = 2;
-            } else if (des === "mist" || des === "haze") {
+            } else if (c === "Mist") {
               tempPic = 3;
             } else {
               tempPic = 0;
@@ -59,8 +60,7 @@ export default class Container extends Component {
                 check: true,
               },
               () => {
-                console.log(this.state.temp);
-                console.log(this.state.description);
+                console.log(res.data.weather[0].main);
               }
             );
           })
@@ -90,6 +90,7 @@ export default class Container extends Component {
                 .then((res) => {
                   const temp = res.data;
                   const t = temp.weather[0];
+                  const c = res.data.weather[0].main;
                   const main = t.main;
                   const des = t.description;
                   let tempr = temp.main.temp - 273.15;
@@ -97,11 +98,11 @@ export default class Container extends Component {
                   let tempPic = this.state.pic;
                    const city = res.data.name;
                   console.log(city);
-                  if (des === "overcast clouds") {
+                  if (c === "Clouds") {
                     tempPic = 1;
-                  } else if (des === "rain" || des === "moderate rain") {
+                  } else if (c === "Rain") {
                     tempPic = 2;
-                  } else if (des === "mist" || des === "haze") {
+                  } else if (c === "Mist") {
                     tempPic = 3;
                   } else {
                     tempPic = 0;
@@ -121,7 +122,7 @@ export default class Container extends Component {
                       // console.log(this.state.description);
                     }
                   );
-                  console.log(res.data);
+                  // console.log(res.data);
                 })
                 .catch((error) => {
                   console.log(error);
